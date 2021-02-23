@@ -105,6 +105,32 @@ func isPangram(forString string: String) -> Bool {
     return filtered.count < 26 ? false : true
 }
 
-isPangram(forString: "The quick brown fox jumped over the lazy dog")
+//isPangram(forString: "The quick brown fox jumped over the lazy dog")
 
 
+func naiveCountVowelAndConsonants(forString string: String) -> String {
+    let cleaned = string.replacingOccurrences(of: " ", with: "")
+    let stringArr = cleaned.map{ String($0) }
+    let range: Array<String> = ["A","E","I","O","U"]
+    var countRange = 0
+    for letter in stringArr {
+        for char in range {
+            if letter == char || letter == char.lowercased() {
+                countRange += 1
+            }
+        }
+    }
+    return "String contains \(countRange) vowels and \(stringArr.count - countRange) consonants"
+}
+
+//naiveCountVowelAndConsonants(forString: "Mississippi")
+
+func smartCountVowelAndConsonants(forString string: String) -> String {
+    let cleaned = string.replacingOccurrences(of: " ", with: "")
+    let range = NSRange(location: 0, length: cleaned.utf16.count)
+    let regex = try! NSRegularExpression(pattern: "[AEIOUaeiou]+")
+    let nbOfVowels = regex.numberOfMatches(in: cleaned, options: [], range: range)
+    return "String contains \(nbOfVowels) vowels and \(cleaned.count - nbOfVowels) consonants"
+}
+
+//smartCountVowelAndConsonants(forString: "Mississippi")
