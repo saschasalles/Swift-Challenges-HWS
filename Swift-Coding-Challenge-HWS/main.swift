@@ -10,7 +10,7 @@ import Foundation
 func challenge1(forString string: String) -> Bool{
     let primmaryArr = Array(string)
     let uniqueArr = Set(primmaryArr)
-    return primmaryArr.count != uniqueArr.count ? false :  true
+    return primmaryArr.count != uniqueArr.count ? false : true
 }
 
 // challenge1(forString: "AaBbCc")
@@ -71,6 +71,40 @@ func cleanSpaces(forString string:String) -> String {
 // cleanSpaces(forString: "    a")
 
 
-func stringIsRotated(forString string: String) {
-    // TODO
+// naïve solution
+
+func stringIsRotated(forBase base: String, and compared: String) -> Bool {
+    if base.count != compared.count {return false}
+    var arrCompared = compared.map { $0 }
+    let arrBase = base.map{ $0 }
+    
+    for _ in 0...arrCompared.count {
+        if arrBase == arrCompared { return true } else {
+            let element = arrCompared.remove(at: 0)
+            arrCompared.insert(element, at: arrCompared.endIndex)
+        }
+    }
+    return false
 }
+
+//stringIsRotated(forBase: "abc", and: "a")
+
+// nice solution
+
+func stringIsRotated2(forBase base: String, and compared: String) -> Bool {
+   guard base.count == compared.count else { return false }
+   let combined = base + base
+   return combined.contains(compared)
+}
+
+//stringIsRotated2(forBase: "abc", and: "a")
+
+func isPangram(forString string: String) -> Bool {
+    let removedDups = Set(string)
+    let filtered = removedDups.filter{ $0 >= "a" && $0 <= "z" }
+    return filtered.count < 26 ? false : true
+}
+
+isPangram(forString: "The quick brown fox jumped over the lazy dog")
+
+
