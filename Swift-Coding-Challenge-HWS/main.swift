@@ -126,11 +126,18 @@ func naiveCountVowelAndConsonants(forString string: String) -> String {
 //naiveCountVowelAndConsonants(forString: "Mississippi")
 
 func smartCountVowelAndConsonants(forString string: String) -> String {
-    let cleaned = string.replacingOccurrences(of: " ", with: "")
-    let range = NSRange(location: 0, length: cleaned.utf16.count)
+    let cleaned = string
+        .components(separatedBy: .punctuationCharacters)
+        .joined(separator: "")
+        .replacingOccurrences(of: " ", with: "")
+   
+    let range = NSRange(location: 0, length: cleaned.count)
     let regex = try! NSRegularExpression(pattern: "[AEIOUaeiou]+")
     let nbOfVowels = regex.numberOfMatches(in: cleaned, options: [], range: range)
     return "String contains \(nbOfVowels) vowels and \(cleaned.count - nbOfVowels) consonants"
+
 }
 
-//smartCountVowelAndConsonants(forString: "Mississippi")
+//smartCountVowelAndConsonants(forString: "Swift Coding Challenges")
+
+
