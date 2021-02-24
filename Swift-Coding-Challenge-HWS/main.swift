@@ -141,3 +141,16 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
 //smartCountVowelAndConsonants(forString: "Swift Coding Challenges")
 
 
+func threeDifferentLetters(forFirst string1: String, andSecond string2: String) -> Bool {
+    if string1.count != string2.count { return false }
+    let arrStr2: Array<Character> = string2.map { $0 }
+    
+    var diff = 0
+    string1.enumerated().forEach { (index, letter) in
+        if letter != arrStr2[index] { diff += 1}
+    }
+    
+    return diff > 3 ? false : true
+}
+
+print(threeDifferentLetters(forFirst: "Clamp", andSecond: "Cramp"))
