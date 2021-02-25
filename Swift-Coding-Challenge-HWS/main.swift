@@ -44,9 +44,9 @@ func charCount(forString string: String) -> () {
 // charCount(forString: "eee eee d")
 
 func charCount2(input: String, count: String) -> Int {
-   let array = input.map { String($0) }
-   let counted = NSCountedSet(array: array)
-   return counted.count(for: count)
+    let array = input.map { String($0) }
+    let counted = NSCountedSet(array: array)
+    return counted.count(for: count)
 }
 
 // charCount2(input: "eee eee d", count: "e")
@@ -92,9 +92,9 @@ func stringIsRotated(forBase base: String, and compared: String) -> Bool {
 // nice solution
 
 func stringIsRotated2(forBase base: String, and compared: String) -> Bool {
-   guard base.count == compared.count else { return false }
-   let combined = base + base
-   return combined.contains(compared)
+    guard base.count == compared.count else { return false }
+    let combined = base + base
+    return combined.contains(compared)
 }
 
 //stringIsRotated2(forBase: "abc", and: "a")
@@ -130,12 +130,12 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
         .components(separatedBy: .punctuationCharacters)
         .joined(separator: "")
         .replacingOccurrences(of: " ", with: "")
-   
+    
     let range = NSRange(location: 0, length: cleaned.count)
     let regex = try! NSRegularExpression(pattern: "[AEIOUaeiou]+")
     let nbOfVowels = regex.numberOfMatches(in: cleaned, options: [], range: range)
     return "String contains \(nbOfVowels) vowels and \(cleaned.count - nbOfVowels) consonants"
-
+    
 }
 
 //smartCountVowelAndConsonants(forString: "Swift Coding Challenges")
@@ -153,4 +153,25 @@ func threeDifferentLetters(forFirst string1: String, andSecond string2: String) 
     return diff > 3 ? false : true
 }
 
-print(threeDifferentLetters(forFirst: "Clamp", andSecond: "Cramp"))
+//print(threeDifferentLetters(forFirst: "Clamp", andSecond: "Cramp"))
+
+
+func longestPrefix(forString string: String) -> String {
+    let parts = string.components(separatedBy: " ")
+    guard let first = parts.first else { return "" }
+    var currentPrefix = ""
+    var bestPrefix = ""
+    for letter in first {
+        currentPrefix.append(letter)
+        for word in parts {
+            if !word.hasPrefix(currentPrefix) {
+                return bestPrefix
+            }
+        }
+        bestPrefix = currentPrefix
+    }
+    return bestPrefix
+}
+
+
+//print(longestPrefix(forString: "swift switch swill swim"))
