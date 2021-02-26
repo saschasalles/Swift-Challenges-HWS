@@ -7,7 +7,7 @@
 
 import Foundation
 
-func challenge1(forString string: String) -> Bool{
+func challenge1(forString string: String) -> Bool {
     let primmaryArr = Array(string)
     let uniqueArr = Set(primmaryArr)
     return primmaryArr.count != uniqueArr.count ? false : true
@@ -26,7 +26,7 @@ func challenge2(forString string: String) -> Bool {
 
 // challenge2(forString: "Rats live on no evil star")
 
-func challenge3(with first: String, second: String ) -> Bool {
+func challenge3(with first: String, second: String) -> Bool {
     return first.sorted() == second.sorted()
 }
 
@@ -35,9 +35,9 @@ func challenge3(with first: String, second: String ) -> Bool {
 
 func charCount(forString string: String) -> () {
     let duplicates = Set(string.sorted())
-    
-    let _: [()] = duplicates.map{ val in
-        print("\(val) est contenu \(string.reduce(0) { $1 == val ? $0 + 1 : $0 }) fois")
+
+    let _: [()] = duplicates.map { val in
+        print("\(val) est contenu \(string.reduce(0) { $1 == val ? $0 + 1: $0 }) fois")
     }
 }
 
@@ -52,10 +52,10 @@ func charCount2(input: String, count: String) -> Int {
 // charCount2(input: "eee eee d", count: "e")
 
 
-func removeDups(forString string:String) -> String {
+func removeDups(forString string: String) -> String {
     let array = string.map { String($0) }
     let ordered = NSOrderedSet(array: array)
-    let cleanArr:[String] = Array(ordered) as! Array<String>
+    let cleanArr: [String] = Array(ordered) as! Array<String>
     return cleanArr.joined()
 }
 
@@ -64,7 +64,7 @@ func removeDups(forString string:String) -> String {
 
 // Note to myself -> https://www.hackingwithswift.com/articles/108/how-to-use-regular-expressions-in-swift
 
-func cleanSpaces(forString string:String) -> String {
+func cleanSpaces(forString string: String) -> String {
     return string.replacingOccurrences(of: " +", with: " ", options: .regularExpression)
 }
 
@@ -74,10 +74,10 @@ func cleanSpaces(forString string:String) -> String {
 // naïve solution
 
 func stringIsRotated(forBase base: String, and compared: String) -> Bool {
-    if base.count != compared.count {return false}
+    if base.count != compared.count { return false }
     var arrCompared = compared.map { $0 }
-    let arrBase = base.map{ $0 }
-    
+    let arrBase = base.map { $0 }
+
     for _ in 0...arrCompared.count {
         if arrBase == arrCompared { return true } else {
             let element = arrCompared.remove(at: 0)
@@ -101,7 +101,7 @@ func stringIsRotated2(forBase base: String, and compared: String) -> Bool {
 
 func isPangram(forString string: String) -> Bool {
     let removedDups = Set(string)
-    let filtered = removedDups.filter{ $0 >= "a" && $0 <= "z" }
+    let filtered = removedDups.filter { $0 >= "a" && $0 <= "z" }
     return filtered.count < 26 ? false : true
 }
 
@@ -110,8 +110,8 @@ func isPangram(forString string: String) -> Bool {
 
 func naiveCountVowelAndConsonants(forString string: String) -> String {
     let cleaned = string.replacingOccurrences(of: " ", with: "")
-    let stringArr = cleaned.map{ String($0) }
-    let range: Array<String> = ["A","E","I","O","U"]
+    let stringArr = cleaned.map { String($0) }
+    let range: Array<String> = ["A", "E", "I", "O", "U"]
     var countRange = 0
     for letter in stringArr {
         for char in range {
@@ -130,12 +130,12 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
         .components(separatedBy: .punctuationCharacters)
         .joined(separator: "")
         .replacingOccurrences(of: " ", with: "")
-    
+
     let range = NSRange(location: 0, length: cleaned.count)
     let regex = try! NSRegularExpression(pattern: "[AEIOUaeiou]+")
     let nbOfVowels = regex.numberOfMatches(in: cleaned, options: [], range: range)
     return "String contains \(nbOfVowels) vowels and \(cleaned.count - nbOfVowels) consonants"
-    
+
 }
 
 //smartCountVowelAndConsonants(forString: "Swift Coding Challenges")
@@ -144,12 +144,12 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
 func threeDifferentLetters(forFirst string1: String, andSecond string2: String) -> Bool {
     if string1.count != string2.count { return false }
     let arrStr2: Array<Character> = string2.map { $0 }
-    
+
     var diff = 0
     string1.enumerated().forEach { (index, letter) in
-        if letter != arrStr2[index] { diff += 1}
+        if letter != arrStr2[index] { diff += 1 }
     }
-    
+
     return diff > 3 ? false : true
 }
 
@@ -175,3 +175,24 @@ func longestPrefix(forString string: String) -> String {
 
 
 //print(longestPrefix(forString: "swift switch swill swim"))
+
+
+func runLengthEncoding(forString string: String) -> String {
+    guard let last = string.last else { return "" }
+    let arr = string.map { $0 }
+    var resultString: String = ""
+    var count = 1
+    for (index, letter) in arr.enumerated() where index + 1 < arr.count {
+        if letter == arr[index + 1] {
+            count += 1
+        } else {
+            resultString += String(letter) + String(count)
+            count = 1
+        }
+    }
+    resultString += String(last) + String(count)
+    print(resultString)
+    return ""
+}
+
+runLengthEncoding(forString: "aaAAaa")
