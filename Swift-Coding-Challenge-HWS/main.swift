@@ -191,8 +191,16 @@ func runLengthEncoding(forString string: String) -> String {
         }
     }
     resultString += String(last) + String(count)
-    print(resultString)
-    return ""
+    return resultString
 }
 
-runLengthEncoding(forString: "aaAAaa")
+//print(runLengthEncoding(forString: "aaabaaabaaa"))
+
+func stringPermutations(ofString string: String) {
+    let len = string.count
+    var permutation = [String]()
+
+    for letter in string {
+        //todo
+    }
+}
