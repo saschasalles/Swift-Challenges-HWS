@@ -35,7 +35,7 @@ func challenge3(with first: String, second: String) -> Bool {
 
 func charCount(forString string: String) -> () {
     let duplicates = Set(string.sorted())
-
+    
     let _: [()] = duplicates.map { val in
         print("\(val) est contenu \(string.reduce(0) { $1 == val ? $0 + 1: $0 }) fois")
     }
@@ -77,7 +77,7 @@ func stringIsRotated(forBase base: String, and compared: String) -> Bool {
     if base.count != compared.count { return false }
     var arrCompared = compared.map { $0 }
     let arrBase = base.map { $0 }
-
+    
     for _ in 0...arrCompared.count {
         if arrBase == arrCompared { return true } else {
             let element = arrCompared.remove(at: 0)
@@ -130,12 +130,12 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
         .components(separatedBy: .punctuationCharacters)
         .joined(separator: "")
         .replacingOccurrences(of: " ", with: "")
-
+    
     let range = NSRange(location: 0, length: cleaned.count)
     let regex = try! NSRegularExpression(pattern: "[AEIOUaeiou]+")
     let nbOfVowels = regex.numberOfMatches(in: cleaned, options: [], range: range)
     return "String contains \(nbOfVowels) vowels and \(cleaned.count - nbOfVowels) consonants"
-
+    
 }
 
 //smartCountVowelAndConsonants(forString: "Swift Coding Challenges")
@@ -144,12 +144,12 @@ func smartCountVowelAndConsonants(forString string: String) -> String {
 func threeDifferentLetters(forFirst string1: String, andSecond string2: String) -> Bool {
     if string1.count != string2.count { return false }
     let arrStr2: Array<Character> = string2.map { $0 }
-
+    
     var diff = 0
     string1.enumerated().forEach { (index, letter) in
         if letter != arrStr2[index] { diff += 1 }
     }
-
+    
     return diff > 3 ? false : true
 }
 
@@ -196,11 +196,26 @@ func runLengthEncoding(forString string: String) -> String {
 
 //print(runLengthEncoding(forString: "aaabaaabaaa"))
 
-func stringPermutations(ofString string: String) {
-    let len = string.count
-    var permutation = [String]()
-
-    for letter in string {
-        //todo
-    }
+func stringPermutations(forString string: String, current: String = "") {
+    let length = string.count
+    let strArray = Array(string)
+    if (length == 0) {
+        print(current)
+    } else {
+        for i in 0 ..< length {
+            let left = String(strArray[0 ..< i])
+            let right = String(strArray[i+1 ..< length])
+            stringPermutations(forString: left + right, current: current +
+                                String(strArray[i]))
+        } }
 }
+
+//stringPermutations(forString: "lol")
+
+
+func reversedString(forString string: String) -> String {
+    let strArr = Array(string.split(separator: " "))
+    return strArr.map{String($0.reversed())}.joined(separator: " ")
+}
+
+//print(reversedString(forString: "Swift Coding Challenges"))
