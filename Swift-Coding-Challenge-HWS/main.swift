@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: Strings
+
 func challenge1(forString string: String) -> Bool {
     let primmaryArr = Array(string)
     let uniqueArr = Set(primmaryArr)
@@ -204,7 +206,7 @@ func stringPermutations(forString string: String, current: String = "") {
     } else {
         for i in 0 ..< length {
             let left = String(strArray[0 ..< i])
-            let right = String(strArray[i+1 ..< length])
+            let right = String(strArray[i + 1 ..< length])
             stringPermutations(forString: left + right, current: current +
                                 String(strArray[i]))
         } }
@@ -215,7 +217,45 @@ func stringPermutations(forString string: String, current: String = "") {
 
 func reversedString(forString string: String) -> String {
     let strArr = Array(string.split(separator: " "))
-    return strArr.map{String($0.reversed())}.joined(separator: " ")
+    return strArr.map { String($0.reversed()) }.joined(separator: " ")
 }
 
 //print(reversedString(forString: "Swift Coding Challenges"))
+
+// MARK: Numbers
+
+func fizzBuzz() {
+    (1...100).forEach {
+        switch true {
+        case $0 % 3 == 0 && $0 % 5 == 0:
+            print("FizzBuzz")
+        case $0 % 3 == 0:
+            print("Fizz")
+        case $0 % 5 == 0:
+            print("Buzz")
+        default:
+            print(String($0))
+        }
+    }
+}
+
+//fizzBuzz()
+
+// better randomization with C func -> arc4random_uniform()
+func randomInt(min: Int, max: Int) -> Int {
+    let range = min...max
+    return range.randomElement() ?? 0
+    
+}
+
+//print(randomInt(min: 1, max: 100))
+
+
+func myPow(number: Double, multiplicator: Double) -> Double {
+    guard number > 0, multiplicator > 0 else { return 0 }
+    if multiplicator == 1 { return number }
+    return number * myPow(number: number, multiplicator: multiplicator - 1)
+}
+
+
+print(myPow(number: 4, multiplicator: 3))
