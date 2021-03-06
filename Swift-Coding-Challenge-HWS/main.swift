@@ -225,16 +225,16 @@ func reversedString(forString string: String) -> String {
 // MARK: Numbers
 
 func fizzBuzz() {
-    (1...100).forEach {
+    (1...100).forEach { value in
         switch true {
-        case $0 % 3 == 0 && $0 % 5 == 0:
+        case value % 3 == 0 && value % 5 == 0:
             print("FizzBuzz")
-        case $0 % 3 == 0:
+        case value % 3 == 0:
             print("Fizz")
-        case $0 % 5 == 0:
+        case value % 5 == 0:
             print("Buzz")
         default:
-            print(String($0))
+            print(String(value))
         }
     }
 }
@@ -258,4 +258,13 @@ func myPow(number: Double, multiplicator: Double) -> Double {
 }
 
 
-print(myPow(number: 4, multiplicator: 3))
+//print(myPow(number: 4, multiplicator: 3))
+
+
+var a = 1
+var b = 2
+var mytupl = (a, b)
+(a, b) = (b, a)
+swap(&a, &b)
+
+
