@@ -263,8 +263,22 @@ func myPow(number: Double, multiplicator: Double) -> Double {
 
 var a = 1
 var b = 2
-var mytupl = (a, b)
-(a, b) = (b, a)
-swap(&a, &b)
+// Swap values
+
+// swap(&a, &b)
+// var mytupl = (a, b)
+// (a, b) = (b, a)
+
+func isPrime(forNumber number: Int) -> Bool {
+    var res: Bool = true
+    (2..<Int(number)).forEach { it in
+        if number % it == 0 {
+            res = false
+            return
+        }
+    }
+    return res
+}
 
 
+//print(isPrime(forNumber: 16777259))
