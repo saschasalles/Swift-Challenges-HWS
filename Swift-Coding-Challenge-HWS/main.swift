@@ -271,14 +271,8 @@ var b = 2
 
 func isPrime(forNumber number: Int) -> Bool {
     var res: Bool = true
-    (2..<Int(number)).forEach { it in
-        if number % it == 0 {
-            res = false
-            return
-        }
-    }
+    if (2..<number).first(where: { number % $0 == 0 }) != nil { res = false }
     return res
 }
 
-
-//print(isPrime(forNumber: 16777259))
+print(isPrime(forNumber: 16777259))
